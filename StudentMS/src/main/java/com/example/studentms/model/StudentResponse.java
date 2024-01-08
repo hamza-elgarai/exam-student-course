@@ -6,11 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class StudentResponse {
     private Student student;
-    private List<CourseResponse> courses;
+    private List<Map<String,Object>> courses;
 }

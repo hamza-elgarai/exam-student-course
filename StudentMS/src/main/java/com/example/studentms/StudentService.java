@@ -20,19 +20,30 @@ public class StudentService {
     private final StudentRepository studentRepository;
     private final StudentCourseRepository studentCourseRepository;
 
-    public List<Student> getStudents(){
+    public List<StudentResponse> getStudents(){
         List<Student> students = studentRepository.findAll();
         List<StudentCourse> studentCourses = studentCourseRepository.findAll();
-//        List<Map> obj=  new RestTemplate().getForObject("http://localhost:8112/courses", List.class);
-//        System.out.println(obj);
-//        List<StudentResponse> response = new ArrayList<>();
-//        for (Student student:students){
-//            List<StudentCourse> studentCourses1 = studentCourses.stream().filter(sc -> sc.getStudentId().equals(student.getId())).toList();
-//            StudentResponse studentResponse = new StudentResponse();
-//            studentResponse.setStudent(student);
-//            studentResponse.setCourses(obj.stream().filter(o -> o.get("id").equals(studentCourses.get(""))));
-//        }
-        return students;
+        List<Map<String, Object>> courses = new RestTemplate().getForObject("http://localhost:8112/courses", List.class);
+        System.out.println(courses);
+
+        List<StudentResponse> responses = new ArrayList<>();
+        for (Student student : students) {
+            List<StudentCourse> studentCoursesForStudent = studentCourses.stream()
+                    .filter(sc -> sc.getStudentId().equals(student.getId()))
+                    .toList();
+
+            StudentResponse studentResponse = new StudentResponse();
+            studentResponse.setStudent(student);
+
+            List<Map<String, Object>> studentCoursesData = courses.stream()
+                    .filter(o -> studentCoursesForStudent.stream()
+                            .anyMatch(sc -> o.get("id").equals(sc.getCourseId())))
+                    .toList();
+
+            studentResponse.setCourses(studentCoursesData);
+            responses.add(studentResponse);
+        }
+        return responses;
 
     }
     public String loadData(){

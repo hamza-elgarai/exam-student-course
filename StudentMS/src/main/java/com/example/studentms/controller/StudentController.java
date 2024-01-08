@@ -2,6 +2,7 @@ package com.example.studentms.controller;
 
 import com.example.studentms.StudentService;
 import com.example.studentms.entity.Student;
+import com.example.studentms.model.StudentResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class StudentController {
 
 
     @GetMapping
-    public List<Student> getStudents(){
+    public List<StudentResponse> getStudents(){
         return studentService.getStudents();
     }
     @GetMapping("/loadData")
