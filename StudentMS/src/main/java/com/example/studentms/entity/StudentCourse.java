@@ -1,4 +1,4 @@
-package com.example.coursems;
+package com.example.studentms.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
-    @Id
+public class StudentCourse {
+    @Id@GeneratedValue
     private Long id;
-    private String name;
-    private String filiere;
+    private Long studentId;
+    private Long courseId;
+
 }

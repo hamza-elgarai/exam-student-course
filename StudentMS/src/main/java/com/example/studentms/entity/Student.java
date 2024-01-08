@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Student {
-    @Id@GeneratedValue
+    @Id
     private Long id;
     private String fname;
     private String lname;

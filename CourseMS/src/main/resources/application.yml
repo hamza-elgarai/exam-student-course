@@ -1,19 +1,24 @@
 server:
-  port: 8111
+  port: 8112
 spring:
   application:
-    name: user-service
+    name: courses-ms
   jpa:
     hibernate:
       ddl-auto:
         create
+    database: postgresql
   datasource:
     url:
-      postgres://avnadmin:AVNS_5vlCXknONwO5yCp_LdF@pg-1ac0a42c-hamzaelgarai10-fb28.a.aivencloud.com:22213/defaultdb?sslmode=require
+      jdbc:postgresql://pg-1ac0a42c-hamzaelgarai10-fb28.a.aivencloud.com:22213/defaultdb
     username:
       avnadmin
     password:
       AVNS_5vlCXknONwO5yCp_LdF
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
 
 
 
